@@ -8,7 +8,8 @@ import {
   Send,
   CheckCircle2,
   AlertCircle,
-  ExternalLink,
+  Copy,
+  Check,
 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
@@ -18,29 +19,23 @@ import {
   GitHubIcon,
   LinkedInIcon,
   XSocialIcon,
+  KaggleIcon,
+  LeetCodeIcon,
+  GFGIcon,
+  GoogleIcon,
+  CredlyIcon,
 } from "@/components/ui/social-icons";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
-const extraProfiles = [
-  { label: "Kaggle", href: "https://www.kaggle.com/shubhamsingh8899" },
-  { label: "LeetCode", href: "https://leetcode.com/u/Shubhamsingh8899/" },
-  {
-    label: "GeeksforGeeks",
-    href: "https://www.geeksforgeeks.org/profile/modelshubha83iq",
-  },
-  {
-    label: "Google Skills",
-    href: "https://www.skills.google/public_profiles/4d52f1c8-ef1c-4995-8adf-457564f84cfd",
-  },
-  {
-    label: "Credly",
-    href: "https://www.credly.com/users/shubham-singh.d74f728b",
-  },
-];
-
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
+  const [copied, setCopied] = useState(false);
+  const copyEmail = () => {
+    navigator.clipboard.writeText(siteConfig.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -161,14 +156,27 @@ export function Contact() {
 
           <Reveal delay={0.1}>
             <div className="space-y-4">
-              <GlassCard className="flex items-center gap-4">
-                <Mail className="text-aqua-400 shrink-0" size={20} />
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="text-sm text-fog-200 hover:text-aqua-400 break-all"
+              <GlassCard className="flex items-center justify-between gap-4 py-4">
+                <div className="flex items-center gap-4 min-w-0 flex-1">
+                  <Mail className="text-aqua-400 shrink-0" size={20} />
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    className="text-sm text-fog-200 hover:text-aqua-400 truncate transition-colors"
+                  >
+                    {siteConfig.email}
+                  </a>
+                </div>
+                <button
+                  onClick={copyEmail}
+                  className="shrink-0 p-2 rounded-lg bg-ink-800/50 text-fog-400 hover:text-aqua-400 hover:bg-ink-700 transition-all border border-glass-border"
+                  aria-label="Copy email"
                 >
-                  {siteConfig.email}
-                </a>
+                  {copied ? (
+                    <Check size={18} className="text-teal-400" />
+                  ) : (
+                    <Copy size={18} />
+                  )}
+                </button>
               </GlassCard>
               <GlassCard className="flex items-center gap-4">
                 <Phone className="text-aqua-400 shrink-0" size={20} />
@@ -186,47 +194,58 @@ export function Contact() {
                 </p>
               </GlassCard>
 
-              <div className="flex gap-3 pt-2">
-                <a
-                  href={siteConfig.social.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  className="p-3 rounded-lg glass text-fog-400 hover:text-aqua-400 transition-colors"
-                >
-                  <GitHubIcon size={20} />
-                </a>
-                <a
-                  href={siteConfig.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="p-3 rounded-lg glass text-fog-400 hover:text-aqua-400 transition-colors"
-                >
-                  <LinkedInIcon size={20} />
-                </a>
-                <a
-                  href={siteConfig.social.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="X (Twitter)"
-                  className="p-3 rounded-lg glass text-fog-400 hover:text-aqua-400 transition-colors"
-                >
-                  <XSocialIcon size={20} />
-                </a>
-              </div>
-
-              <div className="flex flex-wrap gap-2 pt-2">
-                {extraProfiles.map((p) => (
+              <div className="flex flex-wrap gap-3 pt-2">
+                {[
+                  {
+                    icon: GitHubIcon,
+                    href: siteConfig.social.github,
+                    label: "GitHub",
+                  },
+                  {
+                    icon: LinkedInIcon,
+                    href: siteConfig.social.linkedin,
+                    label: "LinkedIn",
+                  },
+                  {
+                    icon: XSocialIcon,
+                    href: siteConfig.social.twitter,
+                    label: "X",
+                  },
+                  {
+                    icon: KaggleIcon,
+                    href: siteConfig.social.kaggle,
+                    label: "Kaggle",
+                  },
+                  {
+                    icon: LeetCodeIcon,
+                    href: siteConfig.social.leetcode,
+                    label: "LeetCode",
+                  },
+                  {
+                    icon: GFGIcon,
+                    href: siteConfig.social.geeksforgeeks,
+                    label: "GfG",
+                  },
+                  {
+                    icon: GoogleIcon,
+                    href: siteConfig.social.googleSkills,
+                    label: "Google Skills",
+                  },
+                  {
+                    icon: CredlyIcon,
+                    href: siteConfig.social.credly,
+                    label: "Credly",
+                  },
+                ].map(({ icon: Icon, href, label }) => (
                   <a
-                    key={p.label}
-                    href={p.href}
+                    key={label}
+                    href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full glass text-xs text-fog-300 hover:text-aqua-400 transition-colors"
+                    aria-label={label}
+                    className="p-2.5 rounded-lg glass text-fog-400 hover:text-aqua-400 hover:border-aqua-400/40 transition-all"
                   >
-                    {p.label}
-                    <ExternalLink size={12} />
+                    <Icon size={18} />
                   </a>
                 ))}
               </div>

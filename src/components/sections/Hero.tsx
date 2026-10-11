@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import { ArrowDown, Mail, ExternalLink, Download } from "lucide-react";
 import Image from "next/image";
 import { siteConfig } from "@/lib/data/site";
@@ -14,6 +14,21 @@ export function Hero() {
     { icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
     { icon: Mail, href: `mailto:${siteConfig.email}`, label: "Email" },
   ];
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-150, 150], [10, -10]);
+  const rotateY = useTransform(x, [-150, 150], [-10, 10]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set(e.clientX - rect.left - rect.width / 2);
+    y.set(e.clientY - rect.top - rect.height / 2);
+  };
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
@@ -126,11 +141,15 @@ export function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:flex justify-center"
+            className="hidden lg:flex justify-center perspective:[1000px]"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
           >
-            <div className="relative">
+            <motion.div
+              style={{ rotateX, rotateY }}
+              className="relative transition-transform duration-100 ease-out"
+            >
               <div className="absolute inset-0 bg-linear-to-tr from-aqua-400/20 to-teal-400/20 rounded-3xl blur-2xl" />
-
               <div className="relative w-80 h-80 rounded-3xl overflow-hidden glass border border-glass-border glow-aqua">
                 <Image
                   src="/avatar.png"
@@ -141,7 +160,6 @@ export function Hero() {
                   priority
                 />
               </div>
-
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -153,7 +171,6 @@ export function Hero() {
                 </p>
                 <p className="text-xs text-fog-400">Global Top 1500</p>
               </motion.div>
-
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -165,7 +182,7 @@ export function Hero() {
                 </p>
                 <p className="text-xs text-fog-400">Champion & Legend</p>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 
