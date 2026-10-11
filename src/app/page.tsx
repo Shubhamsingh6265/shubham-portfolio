@@ -1,3 +1,4 @@
+import { CustomCursor } from "@/components/fx/CustomCursor";
 import { NeuralCanvas } from "@/components/fx/NeuralCanvas";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
@@ -14,6 +15,7 @@ import { ChatWidgetLoader } from "@/components/ai/ChatWidgetLoader";
 export default function Home() {
   return (
     <>
+      <CustomCursor />
       <NeuralCanvas />
       <Hero />
       <About />

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { siteConfig } from "@/lib/data/site";
 import { RotatingText } from "@/components/fx/RotatingText";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/social-icons";
+import { Magnetic } from "@/components/fx/Magnetic";
 
 export function Hero() {
   const socialLinks = [
@@ -35,7 +36,7 @@ export function Hero() {
               ~/shubham $ whoami
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-shimmer cursor-default">
               {siteConfig.name}
             </h1>
 
@@ -65,38 +66,41 @@ export function Hero() {
             </motion.div>
 
             <div className="flex flex-wrap gap-4 mb-8">
-              {/* 1. View Projects */}
-              <motion.a
-                href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-aqua-500 text-ink-950 font-semibold hover:bg-aqua-400 transition-colors glow-aqua-hover"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View Projects
-                <ExternalLink size={18} />
-              </motion.a>
+              <Magnetic>
+                <motion.a
+                  href="#projects"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-aqua-500 text-ink-950 font-semibold hover:bg-aqua-400 transition-colors glow-aqua-hover"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  View Projects
+                  <ExternalLink size={18} />
+                </motion.a>
+              </Magnetic>
 
-              {/* 2. Let's Talk */}
-              <motion.a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg glass text-fog-100 font-semibold hover:bg-glass-highlight transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Let&apos;s Talk
-              </motion.a>
+              <Magnetic>
+                <motion.a
+                  href="#contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg glass text-fog-100 font-semibold hover:bg-glass-highlight transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Let&apos;s Talk
+                </motion.a>
+              </Magnetic>
 
-              {/* 3. NEW: Resume Download Button */}
-              <motion.a
-                href="/resume.pdf"
-                download="Shubham_Singh_Resume.pdf"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg glass text-fog-100 font-semibold hover:bg-glass-highlight transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Resume
-                <Download size={18} />
-              </motion.a>
+              <Magnetic>
+                <motion.a
+                  href="/resume.pdf"
+                  download="Shubham_Singh_Resume.pdf"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg glass text-fog-100 font-semibold hover:bg-glass-highlight transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Resume
+                  <Download size={18} />
+                </motion.a>
+              </Magnetic>
             </div>
 
             <div className="flex gap-4">

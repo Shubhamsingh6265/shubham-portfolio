@@ -160,3 +160,30 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+@keyframes shimmer-sweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    110deg,
+    var(--color-fog-100) 30%,
+    var(--color-aqua-400) 50%,
+    var(--color-fog-100) 70%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: background-position 0.5s ease;
+}
+
+.text-shimmer:hover {
+  animation: shimmer-sweep 1.5s infinite linear;
+}
