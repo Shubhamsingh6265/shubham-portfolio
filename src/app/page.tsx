@@ -1,6 +1,7 @@
 import { NeuralCanvas } from "@/components/fx/NeuralCanvas";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
+import { PipelineBand } from "@/components/sections/PipelineBand";
 import { Skills } from "@/components/sections/Skills";
 import { Journey } from "@/components/sections/Journey";
 import { Projects } from "@/components/sections/Projects";
@@ -16,6 +17,7 @@ export default function Home() {
       <NeuralCanvas />
       <Hero />
       <About />
+      <PipelineBand />
       <Skills />
       <Journey />
       <Projects />

@@ -27,12 +27,18 @@ export function ChatWidget() {
   const [mode, setMode] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // useEffect(() => {
+  //   scrollRef.current?.scrollTo({
+  //     top: scrollRef.current.scrollHeight,
+  //     behavior: "smooth",
+  //   });
+  // }, [messages, loading]);
+
   useEffect(() => {
-    scrollRef.current?.scrollTo({
-      top: scrollRef.current.scrollHeight,
-      behavior: "smooth",
-    });
-  }, [messages, loading]);
+    const open = () => setOpen(true);
+    window.addEventListener("portfolio:open-chat", open);
+    return () => window.removeEventListener("portfolio:open-chat", open);
+  }, []);
 
   async function send(text: string) {
     const trimmed = text.trim();
