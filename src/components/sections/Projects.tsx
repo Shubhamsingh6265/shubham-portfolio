@@ -3,6 +3,8 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Reveal } from "@/components/fx/Reveal";
+import { AnimatedMetric } from "@/components/ui/AnimatedMetric";
+import { TypingTerminal } from "@/components/fx/TypingTerminal";
 import { projects } from "@/lib/data/projects";
 
 export function Projects() {
@@ -30,21 +32,21 @@ export function Projects() {
                 <p className="text-sm text-fog-400 leading-relaxed mb-5 flex-1">
                   {p.solution}
                 </p>
+
+                {p.terminal && (
+                  <TypingTerminal lines={p.terminal} className="mb-5" />
+                )}
+
                 <div className="grid grid-cols-3 gap-2 mb-5">
                   {p.metrics.slice(0, 3).map((m) => (
-                    <div
+                    <AnimatedMetric
                       key={m.label}
-                      className="rounded-lg bg-ink-800/60 p-2 text-center"
-                    >
-                      <p className="font-mono text-aqua-300 text-sm font-bold">
-                        {m.value}
-                      </p>
-                      <p className="text-[10px] text-fog-500 leading-tight mt-0.5">
-                        {m.label}
-                      </p>
-                    </div>
+                      value={m.value}
+                      label={m.label}
+                    />
                   ))}
                 </div>
+
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {p.ai.slice(0, 4).map((t) => (
                     <span
@@ -72,7 +74,7 @@ export function Projects() {
 
         <Reveal className="mb-4">
           <h3 className="font-mono text-sm text-fog-500">
-            // rapid builds — shipped with AI pair-programming
+            {"// rapid builds — shipped with AI pair-programming"}
           </h3>
         </Reveal>
         <div className="grid md:grid-cols-2 gap-6">

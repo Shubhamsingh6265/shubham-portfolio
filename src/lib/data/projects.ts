@@ -7,6 +7,7 @@ export type Project = {
   stack: string[];
   ai: string[];
   metrics: { label: string; value: string }[];
+  terminal?: string[];
   links?: { github?: string; demo?: string };
   status: "completed" | "in-progress" | "concept";
   year: number;
@@ -26,7 +27,13 @@ export const projects: Project[] = [
     metrics: [
       { label: "MuRIL Accuracy", value: "88%" },
       { label: "FinBERT Accuracy", value: "85.1%" },
-      { label: "Languages Supported", value: "10+" },
+      { label: "Languages", value: "10+" },
+    ],
+    terminal: [
+      "$ python train.py --model google/muril --epochs 8",
+      "[info] AutoTokenizer loaded · 11 regional languages",
+      "[train] epoch 8/8 · loss 0.118 · lr 2e-5",
+      "✓ accuracy 88.0% · grievance router live",
     ],
     status: "completed",
     year: 2026,
@@ -48,9 +55,15 @@ export const projects: Project[] = [
       "Location Intelligence",
     ],
     metrics: [
-      { label: "Response Time", value: "<2s" },
+      { label: "Response Time", value: "2s" },
       { label: "Heritage Sites", value: "50+" },
       { label: "Voice Languages", value: "5" },
+    ],
+    terminal: [
+      "$ rag serve --index chroma:heritage_in",
+      "[info] 50+ heritage docs embedded · grok-3-mini",
+      "[gps] tourist @ sanchi-stupa · context 4 chunks",
+      "✓ tts narrative streamed · 1.8s latency",
     ],
     status: "completed",
     year: 2026,
@@ -67,8 +80,14 @@ export const projects: Project[] = [
     ai: ["CNN", "Image Classification", "Object Detection", "Deep Learning"],
     metrics: [
       { label: "Breed Accuracy", value: "82%" },
-      { label: "Database Queries", value: "Optimized 40%" },
+      { label: "Query Speedup", value: "40%" },
       { label: "AWS Uptime", value: "99.5%" },
+    ],
+    terminal: [
+      "$ python predict.py --img cow_042.jpg",
+      "[cnn] breed: cross-bred · confidence 0.82",
+      "[pg] schema optimized · queries 40% faster",
+      "✓ aws endpoint 200 OK · uptime 99.5%",
     ],
     status: "completed",
     year: 2025,
@@ -85,7 +104,7 @@ export const projects: Project[] = [
     ai: ["AI-Assisted Development"],
     metrics: [
       { label: "Functions", value: "50+" },
-      { label: "Load Time", value: "<1s" },
+      { label: "Load Time", value: "1s" },
     ],
     status: "completed",
     year: 2026,
