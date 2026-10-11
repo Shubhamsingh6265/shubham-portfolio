@@ -31,7 +31,7 @@ export function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "glass-strong py-3" : "bg-transparent py-5"
+          scrolled ? "navbar-glass py-3" : "bg-transparent py-5"
         }`}
       >
         <nav className="container mx-auto px-6">

@@ -100,6 +100,13 @@
   -webkit-backdrop-filter: blur(20px);
 }
 
+@utility navbar-glass {
+  background: rgba(7, 11, 16, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+}
+
 /* Base styles */
 html {
   scroll-behavior: smooth;
